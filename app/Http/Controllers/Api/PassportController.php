@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\User; 
 use App\Util;
+use App\Fund;
+use DB;
 use Illuminate\Support\Facades\Auth; 
 
 class PassportController extends Controller
@@ -76,7 +78,7 @@ class PassportController extends Controller
                     $success['name'] =  $user->name;
         
             return response()->json(['success'=>$success], $this-> successStatus); 
-                }
+    }
             /** 
                  * details api 
                  * 
@@ -86,5 +88,38 @@ class PassportController extends Controller
                 { 
                     $user = Auth::user(); 
                     return response()->json(['success' => $user], $this-> successStatus); 
+                }
+
+
+
+                public function getFundDetails()
+                {
+                    $allFund = Fund::all();
+                    $allFund = DB::select('Select * from funds');
+                    if(empty($allFund))
+                    {
+                        $result = array("status"=>0);
+                    }
+                    else
+                    {
+                        $result = array("status"=>1,"data"=>$allFund);
+                    }
+                    return $result;
+                }
+
+                
+                public function getFundHouseDetails()
+                {
+                    $allFund = Fund::all();
+                    $allFund = DB::select('Select * from fund_house');
+                    if(empty($allFund))
+                    {
+                        $result = array("status"=>0);
+                    }
+                    else
+                    {
+                        $result = array("status"=>1,"data"=>$allFund);
+                    }
+                    return $result;
                 }
 }
