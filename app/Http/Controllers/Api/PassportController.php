@@ -48,12 +48,12 @@ class PassportController extends Controller
         $validator = Validator::make($request->all(), [ 
             'name' => 'required', 
             'email' => 'required|email', 
-            'password' => 'required', 
+            'password' => 'required|min:6', 
             'c_password' => 'required|same:password', 
             'bank_name' =>'required',
             'account_no' =>'required',
-            'pan_no' => 'required',
-            'phone_no' =>'required',
+            'pan_no' => 'required|digits:10',
+            'phone_no' =>'required|min:10',
             'address' =>'required',
             ]);
 
@@ -111,7 +111,10 @@ class PassportController extends Controller
                 public function getFundHouseDetails()
                 {
                     $allFund = Fund::all();
-                    $allFund = DB::select('Select * from fund_house');
+                    $allFund = DB::select('SELECT fund_house.fund_name,fund_house.launch_date,funds.fund_scheme,fund_category.category_name
+                    FROM funds
+                    JOIN fund_house  ON funds.fund_id = fund_house.id
+                    JOIN fund_category  ON fund_category.category_id = funds.id');
                     if(empty($allFund))
                     {
                         $result = array("status"=>0);
