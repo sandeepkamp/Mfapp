@@ -47,13 +47,13 @@ class PassportController extends Controller
     { 
         $validator = Validator::make($request->all(), [ 
             'name' => 'required', 
-            'email' => 'required|email', 
+            'email' => 'required|email|unique:users', 
             'password' => 'required|min:6', 
             'c_password' => 'required|same:password', 
             'bank_name' =>'required',
-            'account_no' =>'required',
-            'pan_no' => 'required|digits:10',
-            'phone_no' =>'required|min:10',
+            'account_no' =>'required|unique:users',
+            'pan_no' => 'required|unique:users|alpha_num',
+            'phone_no' =>'required|min:10|numeric',
             'address' =>'required',
             ]);
 
@@ -92,10 +92,10 @@ class PassportController extends Controller
 
 
 
-                public function getFundDetails()
+                public function getFundDetails() //Get all fund schemes
                 {
                     $allFund = Fund::all();
-                    $allFund = DB::select('Select * from funds');
+                    $allFund = DB::select('Select id,fund_name from fund_house');
                     if(empty($allFund))
                     {
                         $result = array("status"=>0);
@@ -108,7 +108,7 @@ class PassportController extends Controller
                 }
 
                 
-                public function getFundHouseDetails()
+              /*  public function getFundHouseDetails()
                 {
                     $allFund = Fund::all();
                     $allFund = DB::select('SELECT fund_house.fund_name,fund_house.launch_date,funds.fund_scheme,fund_category.category_name
@@ -124,5 +124,5 @@ class PassportController extends Controller
                         $result = array("status"=>1,"data"=>$allFund);
                     }
                     return $result;
-                }
+                }*/
 }

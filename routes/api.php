@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('getFundDetails', 'Api\PassportController@getFundDetails');
 Route::get('getFundHouseDetails', 'Api\PassportController@getFundHouseDetails');
+Route::get('/FundHouseall', 'FundController@FundHouseall');
+//Route::get('/FundHouse/{id}', 'FundController@FundHouse');
 Route::post('login', 'Api\PassportController@login');
 Route::post('register', 'Api\PassportController@register');
 Route::group(['middleware' => 'auth:api'], function(){
