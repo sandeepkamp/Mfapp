@@ -18,12 +18,16 @@ class FundController extends Controller
           //return response()->json(Fund::with('fund_scheme')->get());
     }*/
 
-    public function FundHouseall()
-{
+    // Givses All Fund Name with Schemes
+    
+    public function FundHouseall(){
+
        $fundDetails = Fund::with('categories.fundtype')->get();
        return response()->json(['data' => $fundDetails]);
        // $jsonData = json_encode($fundDetails->toArray());
+
     }
+    
 }
     
 

@@ -91,8 +91,9 @@ class PassportController extends Controller
                 }
 
 
+                // Get all Fund House Names
 
-                public function getFundDetails() //Get all fund schemes
+                public function getFundDetails() 
                 {
                     $allFund = Fund::all();
                     $allFund = DB::select('Select id,fund_name from fund_house');
@@ -107,14 +108,15 @@ class PassportController extends Controller
                     return $result;
                 }
 
-                
-              /*  public function getFundHouseDetails()
+                //Get All Funds Related To Equity Type
+
+                public function getEquityFunds()  
                 {
                     $allFund = Fund::all();
                     $allFund = DB::select('SELECT fund_house.fund_name,fund_house.launch_date,funds.fund_scheme,fund_category.category_name
                     FROM funds
                     JOIN fund_house  ON funds.fund_id = fund_house.id
-                    JOIN fund_category  ON fund_category.category_id = funds.id');
+                    JOIN fund_category  ON fund_category.category_id = funds.id WHERE category_name = "equity"') ;
                     if(empty($allFund))
                     {
                         $result = array("status"=>0);
@@ -124,5 +126,5 @@ class PassportController extends Controller
                         $result = array("status"=>1,"data"=>$allFund);
                     }
                     return $result;
-                }*/
+                }
 }

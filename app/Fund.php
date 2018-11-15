@@ -13,7 +13,7 @@ class Fund extends Model
     {
       //  return $this->hasMany(FundsModel::class);   
       return $this->hasMany('Funds');
-     
+  
     }*/
     public function categories(){
       return $this->hasMany('App\FundScheme','fund_id');
