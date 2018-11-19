@@ -96,7 +96,7 @@ class PassportController extends Controller
                 public function getFundDetails() 
                 {
                     $allFund = Fund::all();
-                    $allFund = DB::select('Select id,fund_name from fund_house');
+                    $allFund = DB::select('Select fund_name from fund_house');
                     if(empty($allFund))
                     {
                         $result = array("status"=>0);
@@ -105,12 +105,14 @@ class PassportController extends Controller
                     {
                         $result = array("status"=>1,"data"=>$allFund);
                     }
+                    
                     return $result;
                 }
 
-                //Get All Funds Related To Equity Type
+                //Get All Funds Related To Equity Scheme
 
                 public function getEquityFunds()  
+
                 {
                     $allFund = Fund::all();
                     $allFund = DB::select('SELECT fund_house.fund_name,fund_house.launch_date,funds.fund_scheme,fund_category.category_name
@@ -127,4 +129,87 @@ class PassportController extends Controller
                     }
                     return $result;
                 }
+  
+                // Get All Funds Related To Debt Scheme 
+
+                public function getDebtFunds()  
+
+                {
+                    $allFund = Fund::all();
+                    $allFund = DB::select('SELECT fund_house.fund_name,fund_house.launch_date,funds.fund_scheme,fund_category.category_name
+                    FROM funds
+                    JOIN fund_house  ON funds.fund_id = fund_house.id
+                    JOIN fund_category  ON fund_category.category_id = funds.id WHERE category_name = "debt"') ;
+                    if(empty($allFund))
+                    {
+                        $result = array("status"=>0);
+                    }
+                    else
+                    {
+                        $result = array("status"=>1,"data"=>$allFund);
+                    }
+                    return $result;
+                }
+
+                // Get All Funds Related To Hybrid Scheme 
+
+                public function getHybridFunds()  
+
+                {
+                    $allFund = Fund::all();
+                    $allFund = DB::select('SELECT fund_house.fund_name,fund_house.launch_date,funds.fund_scheme,fund_category.category_name
+                    FROM funds
+                    JOIN fund_house  ON funds.fund_id = fund_house.id
+                    JOIN fund_category  ON fund_category.category_id = funds.id WHERE category_name = "hybrid"') ;
+                    if(empty($allFund))
+                    {
+                        $result = array("status"=>0);
+                    }
+                    else
+                    {
+                        $result = array("status"=>1,"data"=>$allFund);
+                      // $request->json()->all();
+                    }
+                    return $result;
+                }
+
+                public function getIciciFunds()  
+
+                {
+                    $allFund = Fund::all();
+                    $allFund = DB::select('SELECT fund_house.fund_name,funds.fund_scheme,fund_category.category_name
+                    FROM funds
+                    JOIN fund_house  ON funds.fund_id = fund_house.id
+                    JOIN fund_category  ON fund_category.category_id = funds.id WHERE fund_name = "ICICI MF"') ;
+                    if(empty($allFund))
+                    {
+                        $result = array("status"=>0);
+                    }
+
+                    else
+                    {
+                        $result = array('status'=>1,'data'=>$allFund);
+                    }
+
+                    return $result;
+                }
+
+                public function getSbiFunds()
+
+                {
+                    $allFund = Fund::all();
+                    $allFund = DB::select('SELECT fund_house.fund_name,funds.fund_scheme,fund_category.category_name 
+                    FROM funds
+                    JOIN fund_house ON funds.fund_id =fund_house.id
+                    JOIN fund_category ON fund_category.category_id = funds.id WHERE fund_name ="SBI"');
+                    if(empty($allFund))
+                    {
+                        $result = array("status"=>0);
+                    }
+                    else{
+                        $result = array("status"=>1,"data"=>$allFund);
+                    }
+                    return $result;
+                }
+
 }

@@ -10,15 +10,15 @@ use Response;
 class FundController extends Controller
 {    
  
-   /* public function FundHouseall()
-    {
-           // $funds = Fund::all();
-           $funds = Fund::with('fund_id')->get();
-           return response()->json($funds);
-          //return response()->json(Fund::with('fund_scheme')->get());
-    }*/
+    // public function FundHouseall()
+    // {
+    //       $funds = Fund::all();
+    //        $funds = Fund::with('fund_id')->get();
+    //        return response()->json($funds);
+    //       return response()->json(Fund::with('fund_scheme')->get());
+    // }
 
-    // Givses All Fund Name with Schemes
+    // Gives All Fund Name with Schemes
     
     public function FundHouseall(){
 

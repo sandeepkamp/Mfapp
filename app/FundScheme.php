@@ -13,9 +13,9 @@ class FundScheme extends Model
         'fund_id',
         'fund_scheme',
     ];
-   /* public function scheme() {
-        return $this->belongsTo('App\Fund');
-    }*/
+    // public function scheme() {
+    //     return $this->belongsTo('App\Fund');
+    // }
     public function fundtype(){
         return $this->hasMany('App\Category','category_id');
         }

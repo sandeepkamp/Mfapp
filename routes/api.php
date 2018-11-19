@@ -19,7 +19,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('getFundDetails', 'Api\PassportController@getFundDetails');
 Route::get('getEquityFunds', 'Api\PassportController@getEquityFunds');
+Route::get('getDebtFunds', 'Api\PassportController@getDebtFunds');
+Route::get('getHybridFunds', 'Api\PassportController@getHybridFunds');
 Route::get('/FundHouseall', 'FundController@FundHouseall');
+//Route::get('/getRelatedFunds', 'FundController@getRelatedFunds');
+Route::get('getIciciFunds', 'Api\PassportController@getIciciFunds');
+
+Route::get('getSbiFunds', 'Api\PassportController@getSbiFunds');
+// Route::get('api/dropdown', function(){
+//     $fund_house = Input::get('option');
+//       $maker = Maker::find( $fund_house);
+//       $models = $maker->models();
+//       return Response::eloquent($models->get(['id','name']));
+//   });
 //Route::get('/FundHouse/{id}', 'FundController@FundHouse');
 Route::post('login', 'Api\PassportController@login');
 Route::post('register', 'Api\PassportController@register');
